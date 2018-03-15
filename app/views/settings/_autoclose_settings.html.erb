@@ -1,0 +1,26 @@
+<table id="plugin-redmine-github-pull-requests-tool_settings-table">
+  <tbody>
+    <tr>
+      <th style="text-align: left;"><%= t 'active' %></th>
+      <td>
+        <input
+          type="checkbox"
+          name="settings[active]"
+          <% if settings['active'] %> checked="checked"<% end %>
+          value="true">
+      </td>
+    </tr>
+    <tr>
+      <th style="text-align: left;"><%= t 'closed_status_id' %></th>
+      <td>
+        <select name="settings[closed_status_id]">
+          <% IssueStatus.where(is_closed: true).sorted.each do |status| %>
+            <option
+            <% if settings['closed_status_id'] && settings['closed_status_id'].to_i == status.id %> selected<% end %>
+            value="<%= status.id %>"><%= status.name %></option>
+          <% end %>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
